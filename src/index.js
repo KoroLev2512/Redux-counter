@@ -1,4 +1,5 @@
-import {applyMiddleware, createStore, compose} from 'redux'
+import {applyMiddleware, createStore} from 'redux'
+import {composeWithDevTools} from '@redux-devtools/extension';
 import {rootReduser} from "./redux/rootReduser";
 import {increment, decrement, asyncIncrement, changeTheme} from "./redux/actions";
 import {thunk} from "redux-thunk";
@@ -20,12 +21,19 @@ const themeBtn = document.getElementById('theme')
 //         }
 //     }
 // }
+//
+// const store = createStore(
+//     rootReduser,
+//     compose(
+//         applyMiddleware(thunk, logger),
+//         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//     )
+// )
 
 const store = createStore(
     rootReduser,
-    compose(
+    composeWithDevTools(
         applyMiddleware(thunk, logger),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 )
 
